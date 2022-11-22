@@ -33,6 +33,8 @@ public Startup(IConfiguration configuration)
         services.AddTransient<IQuestionDetails, QuestionDetailRepository>();
         services.AddTransient<ILevelInterfaceService, LevelService>();
         services.AddTransient<ICategoryQuestionService, CategoryQuestionService>();
+        services.AddTransient<IRoleDetailsInterfaceService, RoleDetailsService>();
+
         services.AddControllers(options =>
         {
             options.Filters.Add<CustomExceptionFilter>();
