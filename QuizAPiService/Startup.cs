@@ -30,10 +30,9 @@ public Startup(IConfiguration configuration)
     {
         services.AddRazorPages();
         services.AddSingleton<IDesignTimeServices, MysqlEntityFrameworkDesignTimeServices>();
-        services.AddTransient<IQuizInterfaceService, QuizService>();
-
         services.AddTransient<IQuestionDetails, QuestionDetailRepository>();
-
+        services.AddTransient<ILevelInterfaceService, LevelService>();
+        services.AddTransient<ICategoryQuestionService, CategoryQuestionService>();
         services.AddControllers(options =>
         {
             options.Filters.Add<CustomExceptionFilter>();
@@ -43,10 +42,7 @@ public Startup(IConfiguration configuration)
 
         services.AddTransient<CustomExceptionFilter>();
         services.AddSwaggerGen();
-        services.AddControllers(options =>
-        {
-            options.Filters.Add<CustomExceptionFilter>();
-        });
+
     }
     public void Configure(WebApplication app, IWebHostEnvironment env)
     {
@@ -65,13 +61,6 @@ public Startup(IConfiguration configuration)
         app.UseAuthorization();
         app.MapRazorPages();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
-        //app.UseMvc(routes =>
-        //{
-        //    routes.MapRoute(
-        //        name: "defaultapi",
-        //        template: "api/{controller}/{action}",
-        //        defaults: new { controller = "Home", action = "Get" });
-        //});
         app.MapControllerRoute(
            name: "default",
            pattern: "{controller=Home}/{action=Index}/{id?}");

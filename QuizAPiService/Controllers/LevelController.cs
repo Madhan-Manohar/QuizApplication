@@ -1,25 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Ocsp;
 using QuizAPiService.Entities;
 using QuizAPiService.Service.Abstract;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Net;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Security.Claims;
 
 namespace QuizAPiService.Controllers
 {
+  
     [Route("api/[controller]/[action]")]
     [ApiController]
-    public class LevelController : ControllerBase
+   public class LevelController : ControllerBase
     {
         // GET: api/<LevelController>
-        private readonly IQuizInterfaceService _QuizService;
+        private readonly ILevelInterfaceService _QuizService;
 
-        public LevelController(IQuizInterfaceService QuizService)
+        public LevelController(ILevelInterfaceService QuizService)
         {
             _QuizService = QuizService;
         }
@@ -37,24 +39,24 @@ namespace QuizAPiService.Controllers
         }
 
         [HttpGet]
-        public async Task<Level> GetLevelById([FromBody] Level level)
+        public async Task<Level> GetlevelType([FromQuery] String levelType)
         {
-            return await _QuizService.GetLevelByIdAsync(level.LevelId);
+            return await _QuizService.GetLevelByTypeAsync(levelType);
         }
 
-        // POST: LevelController/Create
-        [HttpPost]
+        //POST: LevelController/Create
+       [HttpPost]
         public async Task<IActionResult> InsertLevel([FromBody] Level level)
         {
-            await _QuizService.InsertLevelAsync(level);
-            return Ok();
+            var result = await _QuizService.InsertLevelAsync(level);
+            return Ok(result);
         }
 
-        // POST: LevelController/Create
+        //   POST: LevelController/Create
         [HttpPost]
         public async Task<IActionResult> InsertLevels([FromBody] List<Level> level)
         {
-            await _QuizService.InsertLevelAsync(level);
+            var result = await _QuizService.InsertLevelAsync(level);
             return Ok();
         }
 
@@ -62,39 +64,31 @@ namespace QuizAPiService.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateLevel([FromBody] Level level)
         {
-            await _QuizService.UpdateLevelAsync(level);
-            return Ok();
+            var result = await _QuizService.UpdateLevelAsync(level);
+            return Ok(result);
         }
 
-        // Put: LevelController/Edit/5
+        //// Put: LevelController/Edit/5
         [HttpPut]
         public async Task<IActionResult> UpdateLevels([FromBody] List<Level> level)
         {
-            await _QuizService.UpdateLevelAsync(level);
+            var result = await _QuizService.UpdateLevelAsync(level);
             return Ok();
         }
 
         //// HttpDelete: LevelController/delete/5
-        //[ServiceFilter(typeof(CustomExceptionFilter))]
         [HttpDelete]
-        public async Task<HttpStatusCode> DeleteLevel([FromBody] Level levelId)
+        public async Task<bool> DeleteLevel([FromBody] Level levelId)
         {
-           var status= await _QuizService.DeleteLevelAsync(levelId);
-            if (!status)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            return HttpStatusCode.OK;
+            return await _QuizService.DeleteLevelAsync(levelId);
         }
+
         [HttpDelete]
-        public async Task<HttpStatusCode> DeleteLevels([FromBody] List<Level> lstLevelId)
+        public async Task<IActionResult> DeleteLevels([FromBody] List<Level> lstLevelId)
         {
-            var status = await _QuizService.DeleteLevelAsync(lstLevelId);
-            if (!status)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            return HttpStatusCode.OK;
-        }
+            var result = await _QuizService.DeleteLevelAsync(lstLevelId);
+            return Ok();
+        }   
+
     }
 }

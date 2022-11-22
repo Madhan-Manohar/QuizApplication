@@ -3,8 +3,6 @@ using QuizAPiService.Entities;
 using QuizAPiService.Service.Abstract;
 using System.Net;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace QuizAPiService.Controllers
 {
     [Route("api/[controller]/[action]")]
@@ -12,9 +10,9 @@ namespace QuizAPiService.Controllers
     public class CategoryQuestionController : ControllerBase
     {
         // GET: api/<CategoryQuestionController>
-        private readonly IQuizInterfaceService _QuizService;
+        private readonly ICategoryQuestionService _QuizService;
 
-        public CategoryQuestionController(IQuizInterfaceService QuizService)
+        public CategoryQuestionController(ICategoryQuestionService QuizService)
         {
             _QuizService = QuizService;
         }
@@ -32,9 +30,9 @@ namespace QuizAPiService.Controllers
         }
 
         [HttpGet]
-        public async Task<CategoryQuestion> GetCategoryById([FromBody] CategoryQuestion categoryQuestion)
+        public async Task<CategoryQuestion> GetCategoryType([FromQuery] string categoryQuestionType)
         {
-            return await _QuizService.GetCategoryQuestionByIdAsync(categoryQuestion.CategoryId);
+            return await _QuizService.GetCategoryQuestionByTypeAsync(categoryQuestionType);
         }
 
 
@@ -42,15 +40,15 @@ namespace QuizAPiService.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertCategory([FromBody] CategoryQuestion categoryQuestion)
         {
-            await _QuizService.InsertCategoryQuestionAsync(categoryQuestion);
-            return Ok();
+            var result = await _QuizService.InsertCategoryQuestionAsync(categoryQuestion);
+            return Ok(result);
         }
 
-        // POST: CategoryQuestionController/Create
+        //// POST: CategoryQuestionController/Create
         [HttpPost]
         public async Task<IActionResult> InsertCategorys([FromBody] List<CategoryQuestion> lstCategoryQuestion)
         {
-            await _QuizService.InsertCategoryQuestionAsync(lstCategoryQuestion);
+            var result = await _QuizService.InsertCategoryQuestionAsync(lstCategoryQuestion);
             return Ok();
         }
 
@@ -58,40 +56,31 @@ namespace QuizAPiService.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCategory([FromBody] CategoryQuestion categoryQuestion)
         {
-            await _QuizService.UpdateCategoryQuestionAsync(categoryQuestion);
-            return Ok();
+            var result = await _QuizService.UpdateCategoryQuestionAsync(categoryQuestion);
+            return Ok(result);
         }
 
-        // Put: LevelController/Edit/5
+        //// Put: LevelController/Edit/5
         [HttpPut]
         public async Task<IActionResult> UpdateCategorys([FromBody] List<CategoryQuestion> lstCategoryQuestion)
         {
-            await _QuizService.UpdateCategoryQuestionAsync(lstCategoryQuestion);
+            var result = await _QuizService.UpdateCategoryQuestionAsync(lstCategoryQuestion);
             return Ok();
         }
 
         [HttpDelete]
-        public async Task<HttpStatusCode> DeleteCategoryQuestion([FromBody] List<CategoryQuestion> lstLevel)
+        public async Task<bool> DeleteCategoryQuestion([FromBody] CategoryQuestion categoryQuestion)
         {
-            var status = await _QuizService.DeleteCategoryQuestionAsync(lstLevel);
-            if (!status)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            return HttpStatusCode.OK;
+            return await _QuizService.DeleteCategoryQuestionAsync(categoryQuestion);
         }
 
-        //  [ServiceFilter(typeof(CustomExceptionFilter))]
-        // HttpDelete: CategoryQuestionController/delete/5
+        //// HttpDelete: CategoryQuestionController/delete/5
         [HttpDelete]
-        public async Task<HttpStatusCode> DeleteCategoryQuestions([FromBody] List<CategoryQuestion> lstLevel)
+        public async Task<IActionResult> DeleteCategoryQuestions([FromBody] List<CategoryQuestion> lstCategoryQuestion)
         {
-            var status=await _QuizService.DeleteCategoryQuestionAsync(lstLevel);
-            if(!status)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            return HttpStatusCode.OK;
+            var result = await _QuizService.DeleteCategoryQuestionAsync(lstCategoryQuestion);
+            return Ok();
+
         }
     }
 }

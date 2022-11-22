@@ -18,14 +18,13 @@ namespace QuizMSTest
     public class QuizLevelRepositoryTests
     {
         private readonly QuizContext _dbContext;
-        private readonly IQuizInterfaceService _quizRepository;
-        private readonly ILogger<QuizService> _logger;
-
+        private readonly ILevelInterfaceService _quizRepository;
+        
 
         public QuizLevelRepositoryTests()
         {
             _dbContext = new InMemoryDbContextFactory().GetDbContext();
-            _quizRepository = new QuizService(_dbContext, _logger);
+            _quizRepository = new LevelService(_dbContext);
 
         }
 
@@ -92,11 +91,11 @@ namespace QuizMSTest
         [TestMethod]
         public void GetActiveLevelByIdTest()
         {
-            _dbContext.Levels.Add(new Level { LevelType = "Professional", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            _dbContext.Levels.Add(new Level {  LevelType = "Professional", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
             _dbContext.SaveChanges();
 
             var getLevel = _dbContext.Levels.Where(x => x.LevelType.ToLower() == "Professional".ToLower()).First();
-            Assert.IsTrue(getLevel.CreatedBy == 1);
+            Assert.IsTrue(getLevel.CreatedBy==1);
             Assert.IsTrue(getLevel.LevelType == "Professional");
             Assert.IsTrue(getLevel.IsActive == 1);
         }
@@ -104,16 +103,16 @@ namespace QuizMSTest
         [TestMethod]
         public void InsertLevelTest()
         {
-            var level = _quizRepository.InsertLevelAsync(new Level() { LevelType = "Interediate", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var level = _quizRepository.InsertLevelAsync(new Level() {  LevelType = "Interediate", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
             var insertLevel = _dbContext.Levels.Where(x => x.LevelType.ToLower() == "Interediate".ToLower()).First();
             Assert.IsTrue(level.Result);
             Assert.IsTrue(insertLevel.LevelType == "Interediate");
             Assert.IsTrue(insertLevel.IsActive == 1);
-
+  
         }
         [TestMethod]
         public void InsertLevelsTest()
-        {
+        {       
             var levels = new List<Level>
             {
                 new Level {  LevelType = "StdEasy", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
@@ -134,6 +133,7 @@ namespace QuizMSTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void InsertDuplicateLevelTest()
         {
             var level = _quizRepository.InsertLevelAsync(new Level() { LevelType = "Intermediate", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
@@ -143,6 +143,7 @@ namespace QuizMSTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void InsertLevelDuplicateSingleTest()
         {
             var levels = new List<Level>
@@ -161,25 +162,25 @@ namespace QuizMSTest
             Assert.IsTrue(insertLevel1.LevelType == "StddEasy");
             Assert.IsTrue(insertLevel2.LevelType == "StddMeium");
             Assert.IsTrue(insertLevel3.LevelType == "StddHign");
-
+    
             var level = _quizRepository.InsertLevelAsync(new Level() { LevelType = "StddEasy", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
             Assert.IsFalse(level.Result);
 
         }
-
+      
         [TestMethod]
         public void UpdateLevelTest()
         {
-            var levelInsert = _quizRepository.InsertLevelAsync(new Level() { LevelType = "Standard", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+           var levelInsert = _quizRepository.InsertLevelAsync(new Level() {  LevelType = "Standard", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
             var insertLevel = _dbContext.Levels.Where(x => x.LevelType.ToLower() == "Standard".ToLower()).First();
             insertLevel.ModifiedBy = 1;
             insertLevel.IsActive = 0;
             insertLevel.LevelType = "DifficultMedium";
             insertLevel.ModifiedOn = DateTime.Now;
-            var level = _quizRepository.UpdateLevelAsync(insertLevel);
-            var updateLevels = _dbContext.Levels.Where(x => x.LevelType.ToLower() == "DifficultMedium".ToLower()).First();
+           var level = _quizRepository.UpdateLevelAsync(insertLevel);
+           var updateLevels = _dbContext.Levels.Where(x => x.LevelType.ToLower() == "DifficultMedium".ToLower()).First();
             Assert.IsTrue(updateLevels.LevelType == "DifficultMedium");
-            Assert.IsTrue(updateLevels.IsActive == 0);
+            Assert.IsTrue(updateLevels.IsActive== 0);
             Assert.IsTrue(level.Result);
         }
 
@@ -229,6 +230,7 @@ namespace QuizMSTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void UpdateDuplicateLevelsTest()
         {
             var level = new Level { LevelType = "TestLevel", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
@@ -259,6 +261,7 @@ namespace QuizMSTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void UpdateDuplicateLevlsTest()
         {
             var levels = new List<Level>
@@ -288,9 +291,10 @@ namespace QuizMSTest
 
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void UpdateDuplicateLevelTest()
         {
-            var level = new Level { LevelType = "TestDuplicateLevel", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var level = new Level { LevelType = "TestDuplicateLevel", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };           
 
             var levelInsert = _quizRepository.InsertLevelAsync(level);
             Level lvl = _dbContext.Levels.Where(x => x.LevelType.ToLower() == level.LevelType.ToLower()).First<Level>();
@@ -303,6 +307,7 @@ namespace QuizMSTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void DeleteLevelsTest()
         {
             var lstLevels = new List<Level>
@@ -312,9 +317,9 @@ namespace QuizMSTest
                 new Level {  LevelType = "Difficult", IsActive = 1, CreatedBy = 3, CreatedOn = DateTime.Now }
             };
             var levels = new Level { LevelType = "TestLevel", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
-            var levelInsrt = _quizRepository.InsertLevelAsync(levels);
+            var levelInsrt =  _quizRepository.InsertLevelAsync(levels);
             var levelInsert = _quizRepository.InsertLevelAsync(lstLevels);
-            var distinctLevels = _dbContext.Levels.Where(x => x.LevelType.ToLower() != levels.LevelType.ToLower()).Select(y => y);
+            var distinctLevels = _dbContext.Levels.Where(x => x.LevelType.ToLower()!= levels.LevelType.ToLower()).Select(y => y);
             List<Level> lstGetLevels = new List<Level>();
             foreach (Level level in distinctLevels)
             {
@@ -339,17 +344,16 @@ namespace QuizMSTest
             {
                 Assert.AreEqual("Parameter cannot be null or empty.", ae.Message);
             }
-        }
+}
 
         [TestMethod]
+        [ExpectedException(typeof(AggregateException))]
         public void DeleteLevelTest()
         {
-            var level = new Level { LevelType = "EasyMdium", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var level =  new Level { LevelType = "EasyMdium", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now } ;
             var levelInsert = _quizRepository.InsertLevelAsync(level);
-
-            //    var latestLevel =_dbContext.Levels.OrderByDescending(x => x.LevelId).Take(1).First();
             var latestLevel = _dbContext.Levels.OrderByDescending(x => x.LevelId).Last();
-            var levelLatest = _quizRepository.GetLevelByIdAsync(latestLevel.LevelId);
+            var levelLatest = _quizRepository.GetLevelByTypeAsync(latestLevel.LevelType);
             var levelDelete = _quizRepository.DeleteLevelAsync(levelLatest.Result);
             Assert.IsTrue(levelDelete.Result);
         }
