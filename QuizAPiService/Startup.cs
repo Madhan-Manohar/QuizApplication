@@ -32,6 +32,7 @@ public Startup(IConfiguration configuration)
         services.AddSingleton<IDesignTimeServices, MysqlEntityFrameworkDesignTimeServices>();
         services.AddTransient<IQuestionDetails, QuestionDetailRepository>();
         services.AddTransient<ILevelInterfaceService, LevelService>();
+        services.AddTransient<IQuizdetailService, QuizdetailService>();
         services.AddTransient<ICategoryQuestionService, CategoryQuestionService>();
         services.AddTransient<IRoleDetailsInterfaceService, RoleDetailsService>();
 
