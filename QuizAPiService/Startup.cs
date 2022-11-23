@@ -13,6 +13,7 @@ using QuizAPiService.Middleware;
 using Microsoft.Extensions.Logging;
 using System.Web.Http.Filters;
 
+
 public class Startup
 {
     public IConfiguration Configuration { get; set; }
@@ -36,6 +37,8 @@ public Startup(IConfiguration configuration)
         services.AddTransient<ICategoryQuestionService, CategoryQuestionService>();
         services.AddTransient<IRoleDetailsInterfaceService, RoleDetailsService>();
         services.AddTransient<IUserRoleInterface, UserRoleService>();
+        services.AddTransient<IUserDetail, UserDetailRepository>();
+
 
         services.AddControllers(options =>
         {
