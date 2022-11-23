@@ -36,15 +36,12 @@ namespace QuizAPiService.Service
         public bool DeleteRoleDetailsAsync(int RoleId)
         {
            
-            //var query1 = from gan in _quizContext.Roledetails
-            //          where gan.RoleId == RoleId
-            //          && gan.IsActive == 1
-            //          select gan;
+           
             var query2 = from gan in _quizContext.Userroles
                        where gan.RoleId == RoleId
                        select gan;
 
-            //bool one = query1.Any();
+            
             bool query2_return = query2.Any();
 
 
@@ -79,37 +76,7 @@ namespace QuizAPiService.Service
                     return false;
                     throw new NotFoundException("Role ID Cannot be deleted Since the user in Still active");
                 }
-                //    else
-                //    {
-                //        return false;
-                //        Console.WriteLine("Role ID {RoleId} Should be greated than 0.");
-                //        //throw new NotFoundException("Role ID {RoleId} Should be greated than 0.");
-
-                //    }
-
-
-
-                //if (RoleId > 0)
-                //{
-                //    var deleterole = _quizContext.Roledetails.Find(RoleId);
-                //    var result = _quizContext.Roledetails.Remove(deleterole);
-                //    Save();
-                //    //return true;
-                //    //await _quizContext.SaveChangesAsync();
-
-                //    if (deleterole == null)
-                //    {
-                //        throw new NotFoundException("Role ID {RoleId} not found to delete.");
-                //    }
-                //    return result != null ? true : false;
-                //}
-                //else
-                //{
-                //    return false;
-                //    Console.WriteLine("Role ID {RoleId} Should be greated than 0.");
-                //    //throw new NotFoundException("Role ID {RoleId} Should be greated than 0.");
-
-                //}
+              
             }
             catch (Exception exception)
             {
@@ -197,25 +164,7 @@ namespace QuizAPiService.Service
                 {
                     throw new NotFoundException("Unable to add Role Detail}");
                 }
-                //if (condition == null)
-                //{
-                //    throw new NotFoundException("Unable to add Role Detail}");
-                //}
-                //else if ()
-                //{
-                //    throw new NotFoundException("Role Description is already available}");
-                //}
-
-                //    var result = _quizContext.Roledetails.Where(x => x.RoleId == roledetail.RoleId).FirstOrDefault();
-                //    result.RoleDescription = roledetail.RoleDescription;
-                //    //result.Userroles = roledetail.Userroles;
-                //    result.Status = roledetail.Status;
-                //    result.CreatedOn = roledetail.CreatedOn;
-                //    result.CreatedBy = roledetail.CreatedBy;
-                //    result.IsActive = roledetail.IsActive;
-                //    result.ModifiedBy = roledetail.ModifiedBy;
-                //    result.ModifiedOn = roledetail.ModifiedOn;
-
+               
                 var result = _quizContext.Roledetails.Add(roledetail);
                 await _quizContext.SaveChangesAsync();
                 return result.Entity;
@@ -230,7 +179,7 @@ namespace QuizAPiService.Service
 
         }
 
-        //public async Task<Roledetail> UpdateRoleDetailAsync(Roledetail roledetail)
+ 
         public Roledetail UpdateRoleDetailAsync(Roledetail roledetail)
         {
 
@@ -245,15 +194,12 @@ namespace QuizAPiService.Service
                 {
                     var result = _quizContext.Roledetails.Where(x => x.RoleId == roledetail.RoleId).FirstOrDefault(); 
                     result.RoleDescription = roledetail.RoleDescription;
-                    //result.Userroles = roledetail.Userroles;
+                    
                     result.Status = roledetail.Status;
-                    //result.CreatedOn = roledetail.CreatedOn;
-                    //result.CreatedBy = roledetail.CreatedBy;
                     result.IsActive = roledetail.IsActive;
                     result.ModifiedBy = roledetail.ModifiedBy;
                     result.ModifiedOn = roledetail.ModifiedOn;
 
-                    //_quizContext.Roledetails.Update(roledetail);
                     _quizContext.SaveChangesAsync();
                     
                     return roledetail;
