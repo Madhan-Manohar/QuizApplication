@@ -31,7 +31,7 @@ namespace QuizAPiService.Service
                 {
                     _quizContext.Userdetails.Remove(userdetail);
                     await _quizContext.SaveChangesAsync();
-                    //    _logger.LogInformation("level are deleted");
+                    
                     return true;
                 }
                 else
@@ -120,19 +120,17 @@ namespace QuizAPiService.Service
                         CreatedBy = userdetail.CreatedBy,
                         CreatedOn = userdetail.CreatedOn,
                         ModifiedBy = userdetail.ModifiedBy,
-                        //SysStartTime  = userdetail.SysStartTime,
-                        //SysEndTime = userdetail.SysEndTime,
+                       
 
                         ModifiedOn = userdetail.ModifiedOn 
                     };
 
                     var result = _quizContext.Userdetails.Add(addUser);
                     await _quizContext.SaveChangesAsync();
-                    //      _logger.LogInformation(String.Format("Level {0} is Inserted", level.LevelType));
+                   
                     return true;
                 }
 
-                //   _logger.LogWarning("Level  does not exist to inserted or Duplicate Level is already exist ");
                 return false;
             }
             catch (Exception exception)
@@ -160,16 +158,13 @@ namespace QuizAPiService.Service
                     updateuser.EmployeeName  = userdetail.EmployeeName;
                     updateuser.EmployeeId = userdetail.EmployeeId;
                     updateuser.CompanyId  = userdetail.CompanyId;
-                    //updateuser.SysStartTime = userdetail.SysStartTime;
-                    //updateuser.SysEndTime = userdetail.SysEndTime;
-
+                    
                     var result = _quizContext.Userdetails.Update(updateuser);
                     await _quizContext.SaveChangesAsync();
-                    //         _logger.LogInformation(String.Format("Level {0} is updated", level.LevelType));
+
                     return true;
                 }
 
-                //     _logger.LogWarning("Level  does not exist to update or Duplicate Level is already exist ");
                 return false;
 
             }

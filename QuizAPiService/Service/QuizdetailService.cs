@@ -94,22 +94,7 @@ namespace QuizAPiService.Service
             {
                 if (quizdetail != null && !_quizContext.Quizdetails.Any(x => x.QuizId == quizdetail.QuizId))
                 {
-                    //var addquiz = new Quizdetail()
-                    //{
-                    //    CategoryId=quizdetail.CategoryId,
-                    //    LevelId=quizdetail.LevelId,
-                    //    EmployeeId=quizdetail.EmployeeId,
-                    //    CompanyId=quizdetail.CompanyId,
-                    //    ExpiresOn=quizdetail.ExpiresOn,
-                    //    Status=quizdetail.Status,
-                    //    TotalScore=quizdetail.TotalScore,
-                    //    SecureScore=quizdetail.SecureScore,
-                    //    IsActive=quizdetail.IsActive,
-                    //    CreatedBy=quizdetail.CreatedBy,
-                    //    CreatedOn=quizdetail.CreatedOn,
-                    //    ModifiedBy=quizdetail.ModifiedBy
-                    //};
-
+                   
                     var result = _quizContext.Quizdetails.Add(quizdetail);
                     await _quizContext.SaveChangesAsync();
                     return true;
@@ -139,8 +124,6 @@ namespace QuizAPiService.Service
                     result.TotalScore = quizdetail.TotalScore;
                     result.SecureScore = quizdetail.SecureScore;
                     result.IsActive = quizdetail.IsActive;
-                    //result.CreatedBy = quizdetail.CreatedBy;
-                    //result.CreatedOn = quizdetail.CreatedOn;
                     result.ModifiedBy = quizdetail.ModifiedBy;
                     result.ModifiedOn = quizdetail.ModifiedOn;
                     Save();

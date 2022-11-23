@@ -52,18 +52,7 @@ namespace QuizAPiService.Service
 
 
                 }
-                //var userroleExit = _quizContext.Userroles.Where(x => x.UserRoleId == UserRoleId).ToList();
-                //if (userroleExit.Count() == 1)
-                //{ 
-                //    _quizContext.Userroles.Remove(UserroleExit);
-                //    _quizContext.SaveChangesAsync();
-                //    return true;
-
-                //}
-                //else
-                //{
-                //    throw new NotFoundException("Level ID {UserRoleId} Should be greated than 0.");
-                //}
+            
             }
             catch (Exception exception)
             {
@@ -97,30 +86,7 @@ namespace QuizAPiService.Service
 
         }
 
-        //public async Task<Userrole> GetUserroleByTypeAsync(string userType)
-        //{
-        //    try
-        //    {
-        //        if (!string.IsNullOrEmpty(userType))
-        //        {
-        //            var categoryQuestion = await _quizContext.Userroles.Where(x => x. == userType && x.IsActive == 1).FirstOrDefaultAsync<CategoryQuestion>();
-        //            if (categoryQuestion == null)
-        //            {
-        //                throw new NotFoundException("Category Type {categoryType} doesnot exist.");
-        //            }
-        //            return categoryQuestion;
-        //        }
-        //        else
-        //        {
-        //            throw new NotFoundException("Category Type {categoryType} Should not be null or empty.");
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        string response = string.Format("No LevelId found with LevelType = {0}", categoryType);
-        //        throw new NotFoundException(response);
-        //    }
-        //}
+       
 
         public async Task<IEnumerable<Userrole>> GetUserrolesAsync()
         {
@@ -132,20 +98,7 @@ namespace QuizAPiService.Service
             {
                 throw new NotFoundException(exception.Message);
             }
-            //    try
-
-            //    {
-            //        var categoryQuestion = await _quizContext.Userroles.Where(x => x.IsActive == 1).ToListAsync();
-            //        if (categoryQuestion == null)
-            //        {
-            //            throw new NotFoundException("Userrole doesnot exist.");
-            //        }
-            //        return categoryQuestion;
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        throw new NotFoundException(exception.Message);
-            //    }
+            
         }
 
         public async Task<Userrole> InsertUserroleAsync(Userrole userrole)
