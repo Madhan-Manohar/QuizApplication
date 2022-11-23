@@ -35,6 +35,7 @@ public Startup(IConfiguration configuration)
         services.AddTransient<IQuizdetailService, QuizdetailService>();
         services.AddTransient<ICategoryQuestionService, CategoryQuestionService>();
         services.AddTransient<IRoleDetailsInterfaceService, RoleDetailsService>();
+        services.AddTransient<IUserRoleInterface, UserRoleService>();
 
         services.AddControllers(options =>
         {
