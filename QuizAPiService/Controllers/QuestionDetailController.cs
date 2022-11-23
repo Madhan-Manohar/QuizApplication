@@ -52,13 +52,6 @@ namespace QuizAPiService.Controllers
         }
 
 
-        // POST api/<QuestionDetailController>
-        //[HttpPost]
-        //public async Task<IActionResult> InsertQuestionDetail([FromBody] List<Questiondetail> questiondetail)
-        //{
-        //    await _QuizService.InsertQuestionDetail(questiondetail);
-        //    return Ok();
-        //}
 
 
         [HttpPost]
@@ -78,14 +71,6 @@ namespace QuizAPiService.Controllers
         }
 
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateQuestionDetail([FromBody] List<Questiondetail> lstquestion)
-        //{
-        //    await _QuizService.UpdateQuestionDetail(lstquestion);
-        //    return Ok();
-        //}
-
-
 
         // DELETE api/<QuestionDetailController>/5
         [HttpDelete("{id}")]
@@ -99,16 +84,6 @@ namespace QuizAPiService.Controllers
             return HttpStatusCode.OK;
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<HttpStatusCode> DeleteQuestionDetails([FromBody] int lstquestionId)
-        //{
-        //    var status = await _QuizService.DeleteQuestionDetail(lstquestionId);
-        //    if (!status)
-        //    {
-        //        return HttpStatusCode.NotFound;
-        //    }
-        //    return HttpStatusCode.OK;
-        //}
-
+       
     }
 }

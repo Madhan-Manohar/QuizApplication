@@ -38,9 +38,9 @@ namespace QuizAPiService.Service
                     throw new NotFoundException("Question doesnot exists to delete");
                 }
             }
-            catch
+            catch(Exception exception)
             {
-                throw;
+                throw new NotFoundException(exception.Message);
             }
         }
 
@@ -76,9 +76,9 @@ namespace QuizAPiService.Service
             {
                 return await _quizContext.Questiondetails.Where(x => x.CategoryId == categoryId).FirstAsync<Questiondetail>();
             }
-            catch (Exception excepption)
+            catch (Exception exception)
             {
-                throw new NotFoundException(excepption.Message);
+                throw new NotFoundException(exception.Message);
             }
 
         }
@@ -89,9 +89,9 @@ namespace QuizAPiService.Service
             {
                 return await _quizContext.Questiondetails.Where(x => x.LevelId == levelId).FirstAsync<Questiondetail>();
             }
-            catch (Exception excepption)
+            catch (Exception exception)
             {
-                throw new NotFoundException(excepption.Message);
+                throw new NotFoundException(exception.Message);
             }
 
         }
@@ -139,12 +139,12 @@ namespace QuizAPiService.Service
 
                     var result = _quizContext.Questiondetails.Add(addquestion);
                     await _quizContext.SaveChangesAsync();
-                    //      _logger.LogInformation(String.Format("Level {0} is Inserted", level.LevelType));
+                   
                     return true;
                 }
 
-                //   _logger.LogWarning("Level  does not exist to inserted or Duplicate Level is already exist ");
                 return false;
+                
             }
             catch (Exception exception)
             {
@@ -183,7 +183,7 @@ namespace QuizAPiService.Service
                     return true;
                 }
 
-               
+
                 return false;
 
             }

@@ -37,10 +37,12 @@ namespace QuizAPiService.Entities
 
         [StringLength(maximumLength: 50, MinimumLength = 1, ErrorMessage = "Question Type Should Be Mandatory")]
         [Display(Name = "Question Type")]
+        [RegularExpression(@"^(?:easy|Easy|medium|Medium|Advanced|advanced)$", ErrorMessage = "Invalid Question Type (Enter Only Easy/Medium/Advanced )")]
         public string? Type { get; set; }
 
         [Range(0, 1, ErrorMessage = "IsActive must be a number either 1 or 0 number")]
         [Display(Name = "Is Active")]
+        [RegularExpression("([0-1]+)")]
         public sbyte? IsActive { get; set; }
 
         
@@ -67,11 +69,13 @@ namespace QuizAPiService.Entities
 
         [Range(0, int.MaxValue, ErrorMessage = "CreatedBy must be a positive number")]
         [Display(Name = "Created By")]
+        [RegularExpression("([0-9]+)")]
         public int? CreatedBy { get; set; }
 
         [Display(Name = "Created On")]
         public DateTime? CreatedOn { get; set; }
 
+        [RegularExpression("([0-9]+)")]
         [Display(Name = "Modified By")]
         public int? ModifiedBy { get; set; }
 
@@ -81,6 +85,7 @@ namespace QuizAPiService.Entities
 
         [Range(0, 1, ErrorMessage = "Is Random Selected must be a number either 1 or 0 number")]
         [Display(Name = "Is Random Selected")]
+        [RegularExpression("([0-1]+)")]
         public sbyte? IsRandomSelected { get; set; }
 
       
