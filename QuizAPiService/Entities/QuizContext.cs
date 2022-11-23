@@ -203,9 +203,6 @@ namespace QuizAPiService.Entities
 
                 entity.Property(e => e.State).HasMaxLength(100);
 
-                entity.Property(e => e.SysEndTime).HasColumnType("datetime");
-
-                entity.Property(e => e.SysStartTime).HasColumnType("datetime");
 
                 entity.Property(e => e.Tannumber)
                     .HasMaxLength(20)

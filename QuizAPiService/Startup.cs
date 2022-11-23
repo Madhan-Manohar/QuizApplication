@@ -38,6 +38,8 @@ public Startup(IConfiguration configuration)
         services.AddTransient<IRoleDetailsInterfaceService, RoleDetailsService>();
         services.AddTransient<IUserRoleInterface, UserRoleService>();
         services.AddTransient<IUserDetail, UserDetailRepository>();
+        services.AddTransient<ITenantmasterService, TenantmasterService>();
+        services.AddTransient<ITenantcompanyService, TenantcompanyService>();
 
 
         services.AddControllers(options =>
