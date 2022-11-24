@@ -34,6 +34,7 @@ namespace QuizAPiService.Entities
         public int? CompanyId { get; set; }
 
         [Range(0, 1, ErrorMessage = "IsActive must be a number either 1 or 0 number")]
+         [RegularExpression("([0-1]+)")]
         public sbyte IsActive { get; set; }
 
         [Range(0, int.MaxValue, ErrorMessage = "CreatedBy must be a positive number")]
@@ -47,8 +48,7 @@ namespace QuizAPiService.Entities
 
         public DateTime? ModifiedOn { get; set; }
 
-        //public DateTime? SysStartTime { get; set; }
-        //public DateTime? SysEndTime { get; set; }
+       
 
         [JsonIgnore]
         public virtual Tenantcompany? Company { get; set; }

@@ -39,9 +39,9 @@ namespace QuizAPiService.Service
                     throw new NotFoundException("UserId doesnot exists to delete");
                 }
             }
-            catch
+            catch(Exception exception)
             {
-                throw;
+                throw new NotFoundException(exception.Message);
             }
         }
 
