@@ -168,9 +168,9 @@ namespace QuizAPiService.Service
                 return false;
 
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                throw new NotFoundException(exception.Message);
+                throw new NotFoundException(ex.Message);
             }
         }
     }
