@@ -70,11 +70,11 @@ namespace QuizAPiService.Service
             }
         }
 
-        public async Task<Questiondetail> GetQuestionDetailByCategoryId(int categoryId)
+        public async Task<IEnumerable<Questiondetail>> GetQuestionDetailByCategoryId(int categoryId)
         {
             try
             {
-                return await _quizContext.Questiondetails.Where(x => x.CategoryId == categoryId).FirstAsync<Questiondetail>();
+                return await _quizContext.Questiondetails.Where(x => x.CategoryId == categoryId).ToListAsync<Questiondetail>();
             }
             catch (Exception exception)
             {
@@ -83,11 +83,11 @@ namespace QuizAPiService.Service
 
         }
 
-        public async Task<Questiondetail> GetQuestionDetailByLevelId(int levelId)
+        public async Task<IEnumerable<Questiondetail>> GetQuestionDetailByLevelId(int levelId)
         {
             try
             {
-                return await _quizContext.Questiondetails.Where(x => x.LevelId == levelId).FirstAsync<Questiondetail>();
+                return await _quizContext.Questiondetails.Where(x => x.LevelId == levelId).ToListAsync<Questiondetail>();
             }
             catch (Exception exception)
             {

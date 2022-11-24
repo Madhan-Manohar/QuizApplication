@@ -40,13 +40,13 @@ namespace QuizAPiService.Controllers
 
         // GET api/<QuestionDetailController>/5
         [HttpGet("{id}")]
-        public async Task<Questiondetail> GetQuestionDetailByCategoryId( int categoryId)
+        public async Task<IEnumerable<Questiondetail>> GetQuestionDetailByCategoryId( int categoryId)
         {
             return await _QuizService.GetQuestionDetailByCategoryId(categoryId);
         }
 
         [HttpGet("{id}")]
-        public async Task<Questiondetail> GetQuestionDetailByLevelId([FromRoute] int levelId)
+        public async Task<IEnumerable<Questiondetail>> GetQuestionDetailByLevelId([FromRoute] int levelId)
         {
             return await _QuizService.GetQuestionDetailByLevelId(levelId);
         }
