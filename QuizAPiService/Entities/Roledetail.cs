@@ -43,13 +43,6 @@ namespace QuizAPiService.Entities
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
 
-        //public string? RoleDescription { get; set; }
-        //public sbyte IsActive { get; set; }
-        //public string? Status { get; set; }
-        //public int CreatedBy { get; set; }
-        //public DateTime CreatedOn { get; set; }
-        //public int? ModifiedBy { get; set; }
-        //public DateTime? ModifiedOn { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Userrole> Userroles { get; set; }
