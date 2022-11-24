@@ -79,7 +79,7 @@ namespace QuizAPiService.Entities
         [Display(Name = "Modified By")]
         public int? ModifiedBy { get; set; }
 
-        //[DataType.DateTime]
+     
         [Display(Name = "Modified On")]
         public DateTime? ModifiedOn { get; set; }
 
