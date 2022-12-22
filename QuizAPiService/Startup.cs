@@ -40,7 +40,13 @@ public Startup(IConfiguration configuration)
         services.AddTransient<IUserDetail, UserDetailRepository>();
         services.AddTransient<ITenantmasterService, TenantmasterService>();
         services.AddTransient<ITenantcompanyService, TenantcompanyService>();
-
+        services.AddCors(option =>
+        {
+            option.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            });
+        });
 
         services.AddControllers(options =>
         {
@@ -67,6 +73,7 @@ public Startup(IConfiguration configuration)
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
+        app.UseCors();
         app.UseAuthorization();
         app.MapRazorPages();
         app.UseMiddleware<ExceptionHandlingMiddleware>();
