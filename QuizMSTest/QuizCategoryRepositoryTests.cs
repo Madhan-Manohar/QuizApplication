@@ -31,15 +31,15 @@ namespace QuizMSTest
         {
             var items = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "Webserices", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "RestAPi", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "Webserices", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "RestAPi", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             _dbContext.CategoryQuestions.AddRange(items);
             _dbContext.SaveChanges();
 
             var getCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "RestAPi".ToLower()).First();
-            Assert.IsTrue(getCategoryQuestion.CreatedBy == 1);
+            Assert.IsTrue(getCategoryQuestion.CreatedBy == "1");
             Assert.IsTrue(getCategoryQuestion.CategoryType == "RestAPi");
             Assert.IsTrue(getCategoryQuestion.IsActive == 0);
         }
@@ -49,15 +49,15 @@ namespace QuizMSTest
         {
             var items = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "SQLDb", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "MySqlDb", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "SQLDb", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "MySqlDb", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             _dbContext.CategoryQuestions.AddRange(items);
             _dbContext.SaveChanges();
 
             var getCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "SQLDb".ToLower()).First();
-            Assert.IsTrue(getCategoryQuestion.CreatedBy == 1);
+            Assert.IsTrue(getCategoryQuestion.CreatedBy == "1");
             Assert.IsTrue(getCategoryQuestion.CategoryType == "SQLDb");
             Assert.IsTrue(getCategoryQuestion.IsActive == 1);
         }
@@ -66,11 +66,11 @@ namespace QuizMSTest
         [TestMethod]
         public void GetCategoryQuestionByIdTest()
         {
-            _dbContext.CategoryQuestions.Add(new CategoryQuestion {  CategoryType = "React1", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            _dbContext.CategoryQuestions.Add(new CategoryQuestion {  CategoryType = "React1", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             _dbContext.SaveChanges();
 
             var getCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "React1".ToLower()).First();
-            Assert.IsTrue(getCategoryQuestion.CreatedBy == 1);
+            Assert.IsTrue(getCategoryQuestion.CreatedBy == "1");
             Assert.IsTrue(getCategoryQuestion.CategoryType == "React1");
             Assert.IsTrue(getCategoryQuestion.IsActive == 1);
         }
@@ -78,12 +78,12 @@ namespace QuizMSTest
         [TestMethod]
         public void GetActiveCategoryQuestionByIdTest()
         {
-            _dbContext.CategoryQuestions.Add(new CategoryQuestion {  CategoryType = "Angular1", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            _dbContext.CategoryQuestions.Add(new CategoryQuestion {  CategoryType = "Angular1", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             _dbContext.SaveChanges();
 
 
             var getCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "Angular1".ToLower()).First();
-            Assert.IsTrue(getCategoryQuestion.CreatedBy == 1);
+            Assert.IsTrue(getCategoryQuestion.CreatedBy == "1");
             Assert.IsTrue(getCategoryQuestion.CategoryType == "Angular1");
             Assert.IsTrue(getCategoryQuestion.IsActive == 1);
 
@@ -93,7 +93,7 @@ namespace QuizMSTest
         [TestMethod]
         public void InsertCategoryQuestionTest()
         {
-            var level = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "KnockOut", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var level = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "KnockOut", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             var insertCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "KnockOut".ToLower()).First();
             Assert.IsTrue(level.Result);
             Assert.IsTrue(insertCategoryQuestion.CategoryType == "KnockOut");
@@ -103,13 +103,13 @@ namespace QuizMSTest
         [TestMethod]
         public void InsertCategoryQuestionsTest()
         {
-            var level = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "TSql", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var level = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "TSql", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
 
             var categories = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "Sql", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Oracle", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "SqlServer", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "Sql", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Oracle", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "SqlServer", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             var levelInsert = _quizRepository.InsertCategoryQuestionAsync(categories);
@@ -128,8 +128,8 @@ namespace QuizMSTest
         [ExpectedException(typeof(AggregateException))]
         public void InsertDuplicateCategoryQuestionTest()
         {
-            var categoryQuestion = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "MYsql", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
-            var duplicateCategoryQuestion = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "MYsql", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var categoryQuestion = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "MYsql", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
+            var duplicateCategoryQuestion = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "MYsql", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             Assert.IsFalse(duplicateCategoryQuestion.Result);
         }
 
@@ -139,9 +139,9 @@ namespace QuizMSTest
         {
             var categories = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "Sql12", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Oracle12", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "SqlServer12", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "Sql12", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Oracle12", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "SqlServer12", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             var categoryQuestionInsert = _quizRepository.InsertCategoryQuestionAsync(categories);
@@ -154,7 +154,7 @@ namespace QuizMSTest
             Assert.IsTrue(insertCategory2.CategoryType == "Oracle12");
             Assert.IsTrue(insertCategory3.CategoryType == "SqlServer12");
 
-            var category = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "Sql12", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var category = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "Sql12", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             Assert.IsFalse(category.Result);
 
         }
@@ -162,9 +162,9 @@ namespace QuizMSTest
         [TestMethod]
         public void UpdateCategoryQuestionTest()
         {
-            var levelInsert = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "WebApi", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now });
+            var levelInsert = _quizRepository.InsertCategoryQuestionAsync(new CategoryQuestion() { CategoryType = "WebApi", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now });
             var insertCategoryQuestion = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == "WebApi".ToLower()).First();
-            insertCategoryQuestion.ModifiedBy = 1;
+            insertCategoryQuestion.ModifiedBy = "1";
             insertCategoryQuestion.IsActive = 0;
             insertCategoryQuestion.CategoryType = "Wcf";
             insertCategoryQuestion.ModifiedOn = DateTime.Now;
@@ -178,13 +178,13 @@ namespace QuizMSTest
         [TestMethod]
         public void UpdateCategoryQuestionsTest()
         {
-            var level = new CategoryQuestion { CategoryType = "TestCategoryQuestion", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var level = new CategoryQuestion { CategoryType = "TestCategoryQuestion", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
             var levelInsrt = _quizRepository.InsertCategoryQuestionAsync(level);
             var levels = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "Standard1", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Standard2", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Standard3", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "Standard1", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Standard2", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Standard3", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             var levelInsert = _quizRepository.InsertCategoryQuestionAsync(levels);
@@ -199,9 +199,9 @@ namespace QuizMSTest
             lstGetCategoryQuestions[0].CategoryType = "Professional1";
             lstGetCategoryQuestions[1].CategoryType = "Professional2";
             lstGetCategoryQuestions[2].CategoryType = "Professional3";
-            lstGetCategoryQuestions[0].ModifiedBy = 1;
-            lstGetCategoryQuestions[1].ModifiedBy = 2;
-            lstGetCategoryQuestions[2].ModifiedBy = 3;
+            lstGetCategoryQuestions[0].ModifiedBy = "1";
+            lstGetCategoryQuestions[1].ModifiedBy = "1";
+            lstGetCategoryQuestions[2].ModifiedBy = "1";
             lstGetCategoryQuestions[0].ModifiedOn = DateTime.Now;
             lstGetCategoryQuestions[1].ModifiedOn = DateTime.Now;
             lstGetCategoryQuestions[2].ModifiedOn = DateTime.Now;
@@ -223,7 +223,7 @@ namespace QuizMSTest
         [ExpectedException(typeof(AggregateException))]
         public void UpdateDuplicateCategoryQuestionTest()
         {
-            var categoryQuestion = new CategoryQuestion { CategoryType = "TestDuplicateCategoryQuestion", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var categoryQuestion = new CategoryQuestion { CategoryType = "TestDuplicateCategoryQuestion", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
 
             var levelInsert = _quizRepository.InsertCategoryQuestionAsync(categoryQuestion);
             CategoryQuestion lvl = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == categoryQuestion.CategoryType.ToLower()).First<CategoryQuestion>();
@@ -241,9 +241,9 @@ namespace QuizMSTest
         {
             var categorys = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "React2", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Angular2", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Node2", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "React2", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Angular2", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Node2", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
 
             var categoryQuestionInsert = _quizRepository.InsertCategoryQuestionAsync(categorys);
@@ -268,7 +268,7 @@ namespace QuizMSTest
         [ExpectedException(typeof(AggregateException))]
         public void UpdateDuplicateCategoryTest()
         {
-            var level = new CategoryQuestion { CategoryType = "TestDuplicateCategory", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var level = new CategoryQuestion { CategoryType = "TestDuplicateCategory", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
 
             var levelInsert = _quizRepository.InsertCategoryQuestionAsync(level);
             CategoryQuestion lvl = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() == level.CategoryType.ToLower()).First<CategoryQuestion>();
@@ -286,11 +286,11 @@ namespace QuizMSTest
         {
             var lstCategorys = new List<CategoryQuestion>
             {
-                new CategoryQuestion {  CategoryType = "Java", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = ".net", IsActive = 0, CreatedBy = 1, CreatedOn = DateTime.Now },
-                new CategoryQuestion {  CategoryType = "Cobol", IsActive = 1, CreatedBy = 3, CreatedOn = DateTime.Now }
+                new CategoryQuestion {  CategoryType = "Java", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = ".net", IsActive = 0, CreatedBy = "1", CreatedOn = DateTime.Now },
+                new CategoryQuestion {  CategoryType = "Cobol", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now }
             };
-            var categoryQuestions = new CategoryQuestion { CategoryType = "TestCategory", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var categoryQuestions = new CategoryQuestion { CategoryType = "TestCategory", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
             var categoryQuestionInsrt = _quizRepository.InsertCategoryQuestionAsync(categoryQuestions);
             var categoryQuestionInsert = _quizRepository.InsertCategoryQuestionAsync(lstCategorys);
             var distinctCategorys = _dbContext.CategoryQuestions.Where(x => x.CategoryType.ToLower() != categoryQuestions.CategoryType.ToLower()).Select(y => y);
@@ -310,7 +310,7 @@ namespace QuizMSTest
         {
             try
             {
-                var categoryQuestions = new CategoryQuestion { CategoryType = "React", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+                var categoryQuestions = new CategoryQuestion { CategoryType = "React", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
                 var categoryQuestionInsert = _quizRepository.InsertCategoryQuestionAsync(categoryQuestions);
                 List<int> lstDelete = new List<int>() { 1000, 1001 };
                 var categoryQuestionDelete = _quizRepository.DeleteCategoryQuestionAsync(categoryQuestions);
@@ -326,7 +326,7 @@ namespace QuizMSTest
         [ExpectedException(typeof(AggregateException))]
         public void DeleteCategoryQuestionTest()
         {
-            var categoryQuestion = new CategoryQuestion { CategoryType = "EasyMdium", IsActive = 1, CreatedBy = 1, CreatedOn = DateTime.Now };
+            var categoryQuestion = new CategoryQuestion { CategoryType = "EasyMdium", IsActive = 1, CreatedBy = "1", CreatedOn = DateTime.Now };
             var categoryQuestionInsert = _quizRepository.InsertCategoryQuestionAsync(categoryQuestion);
 
          //   var latestCategory = _dbContext.CategoryQuestions.OrderByDescending(x => x.CategoryId).Take(1).First();

@@ -44,8 +44,8 @@ namespace QuizApiTesting
         {
             var items = new List<Tenantmaster>
             {
-                new Tenantmaster { TenantId = 1,TenantName="VKY",Pannumber="BVBVBV123",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",IsActive=1,CompanyLo="ABC",PasswordExpiry=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy=1,CreatedOn=DateTime.Now },
-                new Tenantmaster { TenantId = 2,TenantName="ABC",Pannumber="QTYTREDG",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",IsActive=1,CompanyLo="ABC",PasswordExpiry=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy=1,CreatedOn=DateTime.Now }
+                new Tenantmaster { TenantId = 1,TenantName="VKY",Pannumber="BVBVBV123",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",IsActive=1,CompanyLocation="ABC",PasswordExpiry=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy="1",CreatedOn=DateTime.Now },
+                new Tenantmaster { TenantId = 2,TenantName="ABC",Pannumber="QTYTREDG",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",IsActive=1,CompanyLocation="ABC",PasswordExpiry=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy="1",CreatedOn=DateTime.Now }
             };
             _dbContext.Tenantmasters.AddRange(items);
             _dbContext.SaveChanges();
@@ -62,7 +62,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void GetTMByIdTest()
         {
-            _dbContext.Tenantmasters.Add(new Tenantmaster() { TenantId = 8, TenantName = "VM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLo = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 2, CreatedOn = DateTime.Now });
+            _dbContext.Tenantmasters.Add(new Tenantmaster() { TenantId = 8, TenantName = "VM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLocation = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             _dbContext.SaveChanges();
 
             var obj = _tenantmaster.GetTMByIdAsync(8);
@@ -70,12 +70,12 @@ namespace QuizApiTesting
             Assert.IsTrue(obj.Result.TenantId == 8);
             Assert.IsTrue(obj.Result.IsActive == 1);
             Assert.IsTrue(obj.Result.Pannumber == "QWSED123");
-            Assert.IsTrue(obj.Result.CreatedBy == 2);
+            Assert.IsTrue(obj.Result.CreatedBy == "1");
         }
         [TestMethod]
         public void InsertTenantmastersTest()
         {
-            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 3, TenantName = "GA", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLo = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 3, TenantName = "GA", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLocation = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var insert = _dbContext.Tenantmasters.Where(x => x.TenantId == 3).First();
             Assert.IsTrue(row.Result);
             Assert.IsTrue(insert.TenantName == "GA");
@@ -84,7 +84,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void UpdateTeanantMasterTest()
         {
-            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 4, TenantName = "VM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLo = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 4, TenantName = "VM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLocation = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var obj = _dbContext.Tenantmasters.Where(x => x.TenantId == 4).First();
 
             obj.IsActive = 0;
@@ -101,7 +101,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void DeleteTM()
         {
-            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 5, TenantName = "MM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLo = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _tenantmaster.InsertTMAsync(new Tenantmaster() { TenantId = 5, TenantName = "MM", Pannumber = "QWSED123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", IsActive = 1, CompanyLocation = "ABC", PasswordExpiry = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var obj = _dbContext.Tenantmasters.Where(x => x.TenantId == 5).First();
 
             var delete = _tenantmaster.DeleteTMsAsync(obj);

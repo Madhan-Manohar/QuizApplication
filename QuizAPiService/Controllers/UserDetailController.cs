@@ -39,7 +39,7 @@ namespace QuizAPiService.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Userdetail> GetUserByUserEmployeeId(int userId)
+        public async Task<Userdetail> GetUserByUserEmployeeId(string userId)
         {
             return await _QuizService.GetUserDetailByEmployeeeId(userId);
         }

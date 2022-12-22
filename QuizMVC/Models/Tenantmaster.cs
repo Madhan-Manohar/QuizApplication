@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using System.Xml.Linq;
-using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
+using System.Linq;
+using System.Web;
 
-namespace QuizAPiService.Entities
+namespace QuizMVC.Models
 {
     public partial class Tenantmaster
     {

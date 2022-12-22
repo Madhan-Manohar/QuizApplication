@@ -4,6 +4,8 @@
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
@@ -133,11 +135,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QuizDetailController.cs" />
     <Compile Include="Controllers\RoleDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryQuestion.cs" />
+    <Compile Include="Models\Level.cs" />
+    <Compile Include="Models\Questiondetail.cs" />
+    <Compile Include="Models\Quizdetail.cs" />
     <Compile Include="Models\RoleDetail.cs" />
+    <Compile Include="Models\Tenantcompany.cs" />
+    <Compile Include="Models\Tenantmaster.cs" />
+    <Compile Include="Models\Userdetail.cs" />
     <Compile Include="Models\Userrole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,6 +198,9 @@
     <Content Include="Views\Shared\navbar.cshtml" />
     <Content Include="Views\RoleDetail\Index.cshtml" />
     <Content Include="Views\Shared\Template.cshtml" />
+    <Content Include="Views\QuizDetail\Index.cshtml" />
+    <Content Include="Views\QuizDetail\Create.cshtml" />
+    <Content Include="Views\QuizDetail\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

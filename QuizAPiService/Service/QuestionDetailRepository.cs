@@ -134,7 +134,7 @@ namespace QuizAPiService.Service
                     CreatedOn = questiondetail.CreatedOn,
                     ModifiedBy = questiondetail.ModifiedBy,
                     ModifiedOn = questiondetail.ModifiedOn,
-                    IsRandomSelected = questiondetail.IsRandomSelected
+                    //IsRandomSelected = questiondetail.IsRandomSelected
                 };
 
                     var result = _quizContext.Questiondetails.Add(addquestion);
@@ -175,7 +175,7 @@ namespace QuizAPiService.Service
                     updatequestiondetail.CreatedOn = questiondetail.CreatedOn;
                     updatequestiondetail.ModifiedBy = questiondetail.ModifiedBy;
                     updatequestiondetail.ModifiedOn = questiondetail.ModifiedOn;
-                    updatequestiondetail.IsRandomSelected = questiondetail.IsRandomSelected;
+                    //updatequestiondetail.IsRandomSelected = questiondetail.IsRandomSelected;
 
                     var result = _quizContext.Questiondetails.Update(updatequestiondetail);
                     await _quizContext.SaveChangesAsync();

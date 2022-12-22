@@ -114,7 +114,7 @@ namespace QuizAPiService.Service
                     updateTenantMaster.Tannumber = tm.Tannumber;
                     updateTenantMaster.Pfreg = tm.Pfreg;
                     updateTenantMaster.Esireg = tm.Esireg;
-                    updateTenantMaster.CompanyLo = tm.CompanyLo;
+                    updateTenantMaster.CompanyLocation = tm.CompanyLocation;
                     updateTenantMaster.PasswordExpiry = tm.PasswordExpiry;
                     updateTenantMaster.Address1 = tm.Address1;
                     updateTenantMaster.Address2 = tm.Address2;

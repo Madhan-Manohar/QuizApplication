@@ -37,8 +37,8 @@ namespace QuizApiTesting
         {
             var items = new List<Tenantcompany>
             {
-                new Tenantcompany { CompanyId=1,CompanyName="ABC",CompanyCode = "ABCK",Pannumber="BVBVBV123",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",State = "TS",MobileNumber="9849003526",TenantId=1, IsActive=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy=1,CreatedOn=DateTime.Now },
-                new Tenantcompany { CompanyId=2,CompanyName="DEF",CompanyCode = "QAWS",Pannumber="QWERDSA",Tannumber="LKJHGF",Pfreg="qwsedr",Esireg="GHF",State = "AP",MobileNumber="95559595959",TenantId=2, IsActive=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy=1,CreatedOn=DateTime.Now },
+                new Tenantcompany { CompanyId=1,CompanyName="ABC",CompanyCode = "ABCK",Pannumber="BVBVBV123",Tannumber="BVBVBV123",Pfreg="qwe",Esireg="BHG",State = "TS",MobileNumber="9849003526",TenantId=1, IsActive=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy="1",CreatedOn=DateTime.Now },
+                new Tenantcompany { CompanyId=2,CompanyName="DEF",CompanyCode = "QAWS",Pannumber="QWERDSA",Tannumber="LKJHGF",Pfreg="qwsedr",Esireg="GHF",State = "AP",MobileNumber="95559595959",TenantId=2, IsActive=1,Address1="ACVGF",Address2="ACVGF",Address3="ACVGF",Pincode="1254",Remarks="ASD",CreatedBy="1",CreatedOn=DateTime.Now },
             };
             _dbContext.Tenantcompanies.AddRange(items);
             _dbContext.SaveChanges();
@@ -55,7 +55,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void GetTCByIdTest()
         {
-            _dbContext.Tenantcompanies.Add(new Tenantcompany() { CompanyId = 3, CompanyName = "ABC", CompanyCode = "ABCK", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            _dbContext.Tenantcompanies.Add(new Tenantcompany() { CompanyId = 3, CompanyName = "ABC", CompanyCode = "ABCK", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             _dbContext.SaveChanges();
 
             var obj = _iservice.GetTCByIdAsync(3);
@@ -67,7 +67,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void InsertTenantcompanyTest()
         {
-            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 4, CompanyName = "Four", CompanyCode = "ABCK", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 4, CompanyName = "Four", CompanyCode = "ABCK", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var insert = _dbContext.Tenantcompanies.Where(x => x.CompanyId == 4).First();
             Assert.IsTrue(row.Result);
             Assert.IsTrue(insert.CompanyName == "Four");
@@ -76,7 +76,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void UpdateTeanantCompanyTest()
         {
-            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 5, CompanyName = "Five", CompanyCode = "QAQA", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 5, CompanyName = "Five", CompanyCode = "QAQA", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var obj = _dbContext.Tenantcompanies.Where(x => x.CompanyId == 5).First();
 
             obj.IsActive = 0;
@@ -93,7 +93,7 @@ namespace QuizApiTesting
         [TestMethod]
         public void DeleteTC()
         {
-            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 6, CompanyName = "Six", CompanyCode = "QAQA", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = 1, CreatedOn = DateTime.Now });
+            var row = _iservice.InsertTCAsync(new Tenantcompany() { CompanyId = 6, CompanyName = "Six", CompanyCode = "QAQA", Pannumber = "BVBVBV123", Tannumber = "BVBVBV123", Pfreg = "qwe", Esireg = "BHG", State = "TS", MobileNumber = "9849003526", TenantId = 1, IsActive = 1, Address1 = "ACVGF", Address2 = "ACVGF", Address3 = "ACVGF", Pincode = "1254", Remarks = "ASD", CreatedBy = "1", CreatedOn = DateTime.Now });
             var obj = _dbContext.Tenantcompanies.Where(x => x.CompanyId == 6).First();
 
             var delete = _iservice.DeleteTCsAsync(obj);

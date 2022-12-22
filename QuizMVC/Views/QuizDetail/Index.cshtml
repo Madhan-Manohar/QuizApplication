@@ -1,0 +1,112 @@
+﻿@model IEnumerable<QuizMVC.Models.Quizdetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            Category
+        </th>
+        <th>
+            Level
+        </th>
+        <th>
+            User
+        </th>
+        <th>
+            Company
+        </th>
+        <th hidden>
+            Expiry Date
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Max Score
+        </th>
+        <th>
+            Obtained Score
+        </th>
+        <th>
+            IsActive
+        </th>
+        <th>
+            Created By
+        </th>
+        <th hidden>
+            Created On
+        </th>
+        <th>
+            Modified By
+        </th>
+        <th hidden>
+            Modified On
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LevelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Userid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyId)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ExpiresOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecureScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedBy)
+            </td>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.QuizId }) |
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @*@Html.ActionLink("Delete", "Delete", new {  id=item.QuizId  })*@
+
+                @Html.ActionLink("Delete", "Delete",
+               new { id = item.QuizId },
+               new { onclick = "return confirm('Are you sure you wish to delete this data?');" })
+
+            </td>
+        </tr>
+    }
+
+</table>

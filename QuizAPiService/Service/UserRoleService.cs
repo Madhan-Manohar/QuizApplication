@@ -132,15 +132,13 @@ namespace QuizAPiService.Service
                 if (userrole.UserRoleId > 0)
                 {
                     var result = _quizContext.Userroles.Where(x => x.UserRoleId == userrole.UserRoleId).FirstOrDefault();
-                    result.EmployeeId = userrole.EmployeeId;
+                    result.Userid = userrole.Userid;
                     result.CompanyId = userrole.CompanyId;
                     result.IsActive = userrole.IsActive;
                     result.ModifiedBy = userrole.ModifiedBy;
                     result.ModifiedOn = userrole.ModifiedOn;
                     result.CreatedOn = userrole.CreatedOn;
                     result.CreatedBy = userrole.CreatedBy;
-                    result.SysStartTime = userrole.SysStartTime;
-                    result.SysEndTime = userrole.SysEndTime;
                     result.UserRoleId = userrole.UserRoleId;
                     result.RoleId = userrole.RoleId;
 

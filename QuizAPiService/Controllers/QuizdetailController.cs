@@ -48,15 +48,14 @@ namespace QuizAPiService.Controllers
             await _QuizService.UpdateQuizdetailAsync(value);
             return Ok();
         }
-        [HttpDelete]
-        public async Task<HttpStatusCode> Delete([FromBody] Quizdetail value)
+
+        [ServiceFilter(typeof(CustomExceptionFilter))]
+        // HttpDelete: CategoryQuestionController/delete/5
+        [HttpDelete("{QuizId}")]
+        public async Task<IActionResult> delete([FromRoute] int QuizId)
         {
-            var status = await _QuizService.DeleteQuizDetailsAsync(value);
-            if (!status)
-            {
-                return HttpStatusCode.NotFound;
-            }
-            return HttpStatusCode.OK;
+            var result = _QuizService.DeleteQDsAsync(QuizId);
+            return StatusCode(200, result);
         }
     }
 }

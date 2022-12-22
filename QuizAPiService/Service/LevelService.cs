@@ -106,8 +106,8 @@ namespace QuizAPiService.Service
                         IsActive = level.IsActive,
                         CreatedBy = level.CreatedBy,
                         CreatedOn = level.CreatedOn,
-                        ModifiedBy= 0,
-                        ModifiedOn = null
+                        ModifiedBy= level.ModifiedBy,
+                        ModifiedOn = level.ModifiedOn
                     };
 
                     var result = _quizContext.Levels.Add(addLevel);

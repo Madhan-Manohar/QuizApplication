@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Linq;
+using System.Web;
 
-namespace QuizAPiService.Entities
+namespace QuizMVC.Models
 {
     public partial class CategoryQuestion
     {

@@ -9,7 +9,7 @@ namespace QuizAPiService.Service.Abstract
         Task<IEnumerable<Userdetail>> GetActiveUsers();
         Task<Userdetail> GetUserDetailByUserId(int userId);
 
-        Task<Userdetail> GetUserDetailByEmployeeeId(int employeeId);
+        Task<Userdetail> GetUserDetailByEmployeeeId(string employeeId);
 
         Task<bool> InsertUserDetail(Userdetail userdetail);
         Task<bool> UpdateUserDetail(Userdetail userdetail);

@@ -64,27 +64,34 @@ namespace QuizAPiService.Service
                 throw new NotFoundException(exception.Message);
             }
         }
-        public async Task<bool> DeleteQuizDetailsAsync(Quizdetail Quiz)
+
+        public bool DeleteQDsAsync(int quizId)
         {
             try
             {
-                var quizexists = _quizContext.Quizdetails.Where(x => x.QuizId == Quiz.QuizId);
-
-                if (quizexists.Count() == 1)
+                if (quizId > 0)
                 {
-                    _quizContext.Quizdetails.Remove(Quiz);
-                    await _quizContext.SaveChangesAsync();
+                    var deleterole = _quizContext.Quizdetails.Find(quizId);
 
-                    return true;
+                    if (deleterole == null)
+                    {
+                        throw new NotFoundException("Quiz ID {QuizId} not found to delete.");
+                    }
+                    else
+                    {
+                        var result = _quizContext.Quizdetails.Remove(deleterole);
+                        Save();
+                        return true;
+                    }
                 }
                 else
                 {
-                    throw new NotFoundException("Quiz doesnot exists to delete");
+                    return false;
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                throw;
+                throw new NotFoundException(exception.Message);
             }
         }
 
@@ -117,7 +124,7 @@ namespace QuizAPiService.Service
 
                     result.CategoryId = quizdetail.CategoryId;
                     result.LevelId = quizdetail.LevelId;
-                    result.EmployeeId = quizdetail.EmployeeId;
+                    result.Userid = quizdetail.Userid;
                     result.CompanyId = quizdetail.CompanyId;
                     result.ExpiresOn = quizdetail.ExpiresOn;
                     result.Status = quizdetail.Status;

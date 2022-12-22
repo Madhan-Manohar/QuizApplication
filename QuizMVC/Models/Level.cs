@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
+using System.Linq;
+using System.Web;
 
-namespace QuizAPiService.Entities
+namespace QuizMVC.Models
 {
-    public partial class CategoryQuestion
+    public partial class Level
     {
-        public CategoryQuestion()
+        public Level()
         {
             Questiondetails = new HashSet<Questiondetail>();
             Quizdetails = new HashSet<Quizdetail>();
         }
 
-        public int CategoryId { get; set; }
-        public string CategoryType { get; set; } = null!;
+        public int LevelId { get; set; }
+        public string LevelType { get; set; } = null!;
         public sbyte IsActive { get; set; }
         public string CreatedBy { get; set; } = null!;
         public DateTime CreatedOn { get; set; }

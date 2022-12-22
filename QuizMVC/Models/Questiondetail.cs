@@ -1,11 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using JsonIgnoreAttribute = System.Text.Json.Serialization.JsonIgnoreAttribute;
+using System.Linq;
+using System.Web;
 
-namespace QuizAPiService.Entities
+namespace QuizMVC.Models
 {
     public partial class Questiondetail
     {

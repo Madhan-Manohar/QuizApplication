@@ -74,11 +74,11 @@ namespace QuizAPiService.Service
 
         }
 
-        public async Task<Userdetail> GetUserDetailByEmployeeeId(int employeeId)
+        public async Task<Userdetail> GetUserDetailByEmployeeeId(string employeeId)
         {
             try
             {
-                return await _quizContext.Userdetails.Where(x => x.EmployeeId == employeeId).FirstAsync<Userdetail>();
+                return await _quizContext.Userdetails.Where(x => x.EmployeeId.ToLower() == employeeId.ToLower()).FirstAsync<Userdetail>();
             }
             catch (Exception excepption)
             {

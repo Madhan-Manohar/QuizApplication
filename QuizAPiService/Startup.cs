@@ -54,7 +54,6 @@ public Startup(IConfiguration configuration)
             options.Filters.Add(new ModelValidationActionFilterAttribute());
         });
 
-
         services.AddTransient<CustomExceptionFilter>();
         services.AddSwaggerGen();
 

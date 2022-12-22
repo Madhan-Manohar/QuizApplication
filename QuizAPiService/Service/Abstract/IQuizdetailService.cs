@@ -10,6 +10,6 @@ namespace QuizAPiService.Service.Abstract
         Task<bool> InsertQuizdetailAsync(Quizdetail quizdetail);
 
         Task<bool> UpdateQuizdetailAsync(Quizdetail quizdetail);
-        Task<bool> DeleteQuizDetailsAsync(Quizdetail Quiz);
+        bool DeleteQDsAsync(int quizId);
     }
 }

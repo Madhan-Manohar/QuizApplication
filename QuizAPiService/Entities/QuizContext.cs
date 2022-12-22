@@ -31,8 +31,7 @@ namespace QuizAPiService.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySql("data source=localhost;port=3306;user id=root;password=Ganesh;initial catalog=quiz", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.31-mysql"));
+                optionsBuilder.UseMySql("name=con", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.31-mysql"));
             }
         }
 
@@ -50,7 +49,11 @@ namespace QuizAPiService.Entities
 
                 entity.Property(e => e.CategoryType).HasMaxLength(100);
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
             });
@@ -59,9 +62,13 @@ namespace QuizAPiService.Entities
             {
                 entity.ToTable("level");
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.LevelType).HasMaxLength(50);
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
             });
@@ -79,9 +86,13 @@ namespace QuizAPiService.Entities
 
                 entity.Property(e => e.CorrectOption).HasMaxLength(50);
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.ImageUrl).HasMaxLength(200);
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -104,7 +115,7 @@ namespace QuizAPiService.Entities
                     .HasConstraintName("FK_QuestionDetails_category_Question");
 
                 entity.HasOne(d => d.Level)
-                   .WithMany(p => p.Questiondetails)
+                    .WithMany(p => p.Questiondetails)
                     .HasForeignKey(d => d.LevelId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_QuestionDetails_Level");
@@ -119,13 +130,21 @@ namespace QuizAPiService.Entities
 
                 entity.HasIndex(e => e.LevelId, "FK_QuizDetails_Level");
 
-                entity.HasIndex(e => e.CategoryId, "FK_QuizDetails_category_Question");
+                entity.HasIndex(e => e.Userid, "FK_QuizDetails_Userdetail");
+
+                entity.HasIndex(e => e.CategoryId, "FK_QuizDetails_categoryQuestion");
+
+                entity.HasIndex(e => e.CompanyId, "FK_QuizDetails_category_Question");
 
                 entity.Property(e => e.CategoryId).HasColumnName("categoryId");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.ExpiresOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -135,6 +154,12 @@ namespace QuizAPiService.Entities
                     .WithMany(p => p.Quizdetails)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_QuizDetails_categoryQuestion");
+
+                entity.HasOne(d => d.Company)
+                    .WithMany(p => p.Quizdetails)
+                    .HasForeignKey(d => d.CompanyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_QuizDetails_category_Question");
 
                 entity.HasOne(d => d.Level)
@@ -142,6 +167,11 @@ namespace QuizAPiService.Entities
                     .HasForeignKey(d => d.LevelId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_QuizDetails_Level");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Quizdetails)
+                    .HasForeignKey(d => d.Userid)
+                    .HasConstraintName("FK_QuizDetails_Userdetail");
             });
 
             modelBuilder.Entity<Roledetail>(entity =>
@@ -151,7 +181,11 @@ namespace QuizAPiService.Entities
 
                 entity.ToTable("roledetails");
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -179,6 +213,8 @@ namespace QuizAPiService.Entities
 
                 entity.Property(e => e.CompanyName).HasMaxLength(200);
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Esireg)
@@ -186,6 +222,8 @@ namespace QuizAPiService.Entities
                     .HasColumnName("ESIReg");
 
                 entity.Property(e => e.MobileNumber).HasMaxLength(20);
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -202,7 +240,6 @@ namespace QuizAPiService.Entities
                 entity.Property(e => e.Remarks).HasMaxLength(100);
 
                 entity.Property(e => e.State).HasMaxLength(100);
-
 
                 entity.Property(e => e.Tannumber)
                     .HasMaxLength(20)
@@ -228,15 +265,19 @@ namespace QuizAPiService.Entities
 
                 entity.Property(e => e.Address3).HasMaxLength(100);
 
-                entity.Property(e => e.CompanyLo)
+                entity.Property(e => e.CompanyLocation)
                     .HasMaxLength(100)
-                    .HasColumnName("CompanyLo;");
+                    .HasColumnName("CompanyLocation;");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
 
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Esireg)
                     .HasMaxLength(50)
                     .HasColumnName("ESIReg");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -268,13 +309,19 @@ namespace QuizAPiService.Entities
 
                 entity.HasIndex(e => e.CompanyId, "FK_UserDetails_TenantCompanies");
 
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
+                entity.Property(e => e.EmployeeId).HasMaxLength(50);
+
                 entity.Property(e => e.EmployeeName).HasMaxLength(100);
 
                 entity.Property(e => e.Gender).HasMaxLength(10);
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -292,7 +339,13 @@ namespace QuizAPiService.Entities
 
                 entity.HasIndex(e => e.CompanyId, "FK_UserRoles_TenantCompanies");
 
+                entity.HasIndex(e => e.Userid, "FK_UserRoles_Userdetail");
+
+                entity.Property(e => e.CreatedBy).HasMaxLength(100);
+
                 entity.Property(e => e.CreatedOn).HasColumnType("datetime");
+
+                entity.Property(e => e.ModifiedBy).HasMaxLength(100);
 
                 entity.Property(e => e.ModifiedOn).HasColumnType("datetime");
 
@@ -307,6 +360,12 @@ namespace QuizAPiService.Entities
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserRoles_RoleDetails");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Userroles)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRoles_Userdetail");
             });
 
             OnModelCreatingPartial(modelBuilder);

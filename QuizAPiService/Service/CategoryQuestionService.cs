@@ -110,8 +110,8 @@ namespace QuizAPiService.Service
                         IsActive = categoryQuestion.IsActive,
                         CreatedBy = categoryQuestion.CreatedBy,
                         CreatedOn = categoryQuestion.CreatedOn,
-                        ModifiedBy = 0,
-                        ModifiedOn = null
+                        ModifiedBy = categoryQuestion.ModifiedBy,
+                        ModifiedOn = categoryQuestion.ModifiedOn
                     };
 
                     var result = _quizContext.CategoryQuestions.Add(addCategoryQuestion);
