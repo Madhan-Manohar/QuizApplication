@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{2E
 		D:\Quiz App\Quiz_FrontEnd\White Template\Take_Quiz1.html = D:\Quiz App\Quiz_FrontEnd\White Template\Take_Quiz1.html
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizMVC", "QuizMVC\QuizMVC.csproj", "{1024BF80-DAF9-4F5D-ABD3-C77930A8B2A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{F2D5EA46-C4DF-4685-8E3C-615A13E80828}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2D5EA46-C4DF-4685-8E3C-615A13E80828}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2D5EA46-C4DF-4685-8E3C-615A13E80828}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1024BF80-DAF9-4F5D-ABD3-C77930A8B2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1024BF80-DAF9-4F5D-ABD3-C77930A8B2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1024BF80-DAF9-4F5D-ABD3-C77930A8B2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1024BF80-DAF9-4F5D-ABD3-C77930A8B2A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

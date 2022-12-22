@@ -8,7 +8,7 @@ namespace QuizAPiService.Entities
     public partial class Userrole
     {
         [Key]
-        [Range(0, int.MaxValue, ErrorMessage = "UserRoleId must be a positive number")]
+        //[Range(0, int.MaxValue, ErrorMessage = "UserRoleId must be a positive number")]
         public int UserRoleId { get; set; }
         [Range(0, int.MaxValue, ErrorMessage = "RoleId must be a positive number")]
         public int RoleId { get; set; }

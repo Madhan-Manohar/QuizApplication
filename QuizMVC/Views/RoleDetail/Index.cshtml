@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/navbar.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="row" id="row1" style="border:2px solid black;margin: 0 auto;padding:20px;">
+    <div class="col-md-2">
+        Role Description
+    </div>
+    <div class="col-md-10">
+        <input type="text" id="description" class="form-control" placeholder="Enter ROLE Description" />
+    </div>
+    <div class="col-md-2">
+        status
+    </div>
+    <div class="col-md-10">
+        <input type="text" id="status" class="form-control" placeholder="Enter Active" />
+    </div>
+    @*hidden Primary Id Column-----------------------------------------------------------------------*@
+    <div class="col-md-2" hidden>
+        Role Id
+    </div>
+    <div class="col-md-10" hidden>
+        <input type="text" id="roleid" class="form-control" placeholder="Enter Active" />
+    </div>
+    @*------------------------------------------------------------------------------------------------*@
+
+    <div class="col-md-12">
+        <button class=" btn btn-success" onclick="saverole()"> Save </button>
+    </div>
+    <div class="col-md-12">
+        <button class=" btn btn-primary" onclick="editrole()"> Save Edit </button>
+    </div>
+    <br />
+    <br />
+    <br />
+
+    @*<div class="container">
+            <table id="table1" class="table table-dark">
+                <tr><th>Role Description</th><th>status</th><th>active</th><th>modified by</th><th>created by </th></tr>
+            </table>
+        </div>*@
+    <div class="container">
+        <table class="table table-dark" id="Table">
+
+            <tr>
+                @*<th>RoleId</th>*@
+                <th>RoleDescription</th>
+                <th>status</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Content/Scripts/Role.js"></script>

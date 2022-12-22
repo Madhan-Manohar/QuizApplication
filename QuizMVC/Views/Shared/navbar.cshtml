@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/styles/navbar.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="wrapper">
+
+        <nav id="sidebar">
+            <br>
+
+            <div class="sidebar-header">
+                <h3>Indium Quiz </h3>
+                @*<img src="IQUIZ2.png" style="width:170px;height:80px;margin-left: 0px; margin-top: 0px;">*@
+            </div>
+
+            <ul class="list-unstyled">
+
+
+                <li>
+
+                    <a href="#">Home</a>
+
+                </li>
+                <li>
+                    <a href="#">Take Quiz</a>
+
+                </li>
+                <li>
+                    <a href="#"> Contribute</a>
+                </li>
+
+                <li>
+                    <a href="#">Assign Quiz</a>
+                </li>
+
+                <li>
+
+                    <a href="#"> Admin </a>
+                </li>
+
+            </ul>
+        </nav>
+        <div>
+            @RenderBody()
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

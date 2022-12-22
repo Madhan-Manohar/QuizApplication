@@ -60,27 +60,27 @@ namespace QuizAPiService.Service
             }
         }
 
-        public async Task<Userrole> GetUserroleByIdAsync(int userId)
+        public async Task<Userrole> GetUserroleByIdAsync(int UserRoleId)
         {
             try
             {
-                if (userId > 0)
+                if (UserRoleId > 0)
                 {
-                    var categoryQuestion = await _quizContext.Userroles.Where(x => x.UserRoleId == userId && x.IsActive == 1).FirstOrDefaultAsync<Userrole>();
+                    var categoryQuestion = await _quizContext.Userroles.Where(x => x.UserRoleId == UserRoleId && x.IsActive == 1).FirstOrDefaultAsync<Userrole>();
                     if (categoryQuestion == null)
                     {
-                        throw new NotFoundException("UserRole ID {userId} not found.");
+                        throw new NotFoundException("UserRole ID {UserRoleId} not found.");
                     }
                     return categoryQuestion;
                 }
                 else
                 {
-                    throw new NotFoundException("user ID {userId} Should be greated than 0.");
+                    throw new NotFoundException("user ID {UserRoleId} Should be greated than 0.");
                 }
             }
             catch
             {
-                string response = string.Format("No userId found with ID = {0}", userId);
+                string response = string.Format("No userId found with ID = {0}", UserRoleId);
                 throw new NotFoundException(response);
             }
 

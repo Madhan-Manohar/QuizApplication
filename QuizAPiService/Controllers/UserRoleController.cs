@@ -26,9 +26,9 @@ namespace QuizAPiService.Controllers
         }
 
         [HttpGet("{UserRoleId}")]
-        public async Task<Userrole> Get( int UserId)
+        public async Task<Userrole> Get( int UserRoleId)
         {
-            return await _UserRoleService.GetUserroleByIdAsync(UserId);
+            return await _UserRoleService.GetUserroleByIdAsync(UserRoleId);
         }
 
         // POST: UserRoleController/Create
